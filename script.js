@@ -61,6 +61,9 @@ function dragLeave() {
 
 function dragDrop() {
     let clono = details[0].cloneNode(true);
+    let nextCell = this.nextElementSibling;
+    let btn = nextCell.firstElementChild;
+    btn.setAttribute("style", "display:flex");
     this.append(clono);
     let asd = this.getElementsByClassName("empty");
     asd[0].classList.add("display-none");
