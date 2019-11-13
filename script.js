@@ -1,7 +1,11 @@
 const attrButtons = document.getElementsByClassName('atributes');
-
+const modal = document.getElementById("modal-backdrop");
 const dragPill = document.querySelectorAll(".drag-pill.full");
 const dragDestinations = document.querySelectorAll(".receive");
+
+const closeModal = () => {
+    modal.setAttribute("style", "display:none")
+}
 
 // expand attibutes list
 for (let i = 0; i < attrButtons.length; i++) {
@@ -11,7 +15,8 @@ for (let i = 0; i < attrButtons.length; i++) {
         let id = this.getAttribute("data-target");
         let section = document.getElementById(id);
         let svg = this.getElementsByClassName("icon");
-        
+
+        // check if clicked button is open or not
         if ( this.getAttribute("data-open")=="false") {
             this.setAttribute("data-open", "true")
             section.setAttribute("style", "display:initial");
@@ -30,13 +35,37 @@ for (let i = 0; i < attrButtons.length; i++) {
     }
 }
 
-const details = document.getElementsByClassName('details');
+
+//-------------------------------------------------
+//-------------------Drag stuff--------------------
+
+const details = document.getElementsByClassName('details'); 
+var getTag;
+var getAttr;
+var nested;
+
 // drag functions
 function dragStart(e) {
-    var crt = this.cloneNode(true);
+    let crt = this.cloneNode(true);
     crt.setAttribute("style", "position:absolute; transform: translateX(-10000px)");
     document.body.appendChild(crt);
     e.dataTransfer.setDragImage(crt, 0, 0);
+    let activeAttr = document.querySelector('[data-attr="true"]').getElementsByTagName("code")[0].getAttribute("data-tag");
+
+    getTag = 
+        (this.parentElement.getAttribute("data-tag") !== null) 
+        ? 
+        this.parentElement.getAttribute("data-tag") : 
+        activeAttr;
+
+    nested = 
+        (this.parentElement.getAttribute("data-tag") == null) 
+        ?
+        true :
+        false;
+    console.log(nested);
+    getAttr = this.getElementsByTagName("span")[0].innerHTML;
+
 }
 
 function dragEnd() {
@@ -67,11 +96,20 @@ function dragDrop() {
 
     if ( asd[0].getAttribute("data-view") == "true") {
         btn.setAttribute("style", "display:flex");
+        clono.getElementsByClassName("tagsinfo")[0].innerHTML = getTag;
+        clono.getElementsByClassName("local-attribute")[0].innerHTML = ` - ${getAttr}`;
         this.append(clono);
+        clono.getElementsByClassName("tagsinfo");
         asd[0].classList.add("display-none"); 
         asd[0].setAttribute("data-view", "false");
+  
+    } else {}
+
+    if (nested === false) {
+        clono.getElementsByClassName("filter")[0].setAttribute("style", "display: none");
     } else {
-        
+        clono.getElementsByClassName("filter")[0].setAttribute("style", " ");
+        modal.setAttribute("style", " ");
     }
 }
 
@@ -87,5 +125,9 @@ for(destination of dragDestinations) {
     destination.addEventListener("dragleave", dragLeave);
     destination.addEventListener("drop", dragDrop);
 }
+
+//---------------------------------------
+//---------------------------------------
+
 
 

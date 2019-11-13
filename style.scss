@@ -43,22 +43,29 @@ table {
     }
 }
 
-button.menu {
-    background: none;
-    border: none;
-    display: none;
-    padding: 4px;
+button {
     &:focus {
         outline: 0;
     }
     &:hover {
         cursor: pointer;
     }
-    .icon {
-        transform: scale(1);
+    &.menu {
+        background: none;
+        border: none;
+        display: none;
+        padding: 4px;
     }
-
+    &.link {
+        background: none;
+        padding: 0;
+        border: 0;
+        text-decoration: underline;
+        color: var(--accent);
+        outline: 0;
+    }
 }
+
 // ---------------------
 // ------ 
 
@@ -240,14 +247,41 @@ button.menu {
     font-size: 14px;
     .tagsinfo {
         font-weight: 400;
-        span {font-weight: 100;}
         padding-bottom: 2px;
     }
+    .local-attribute {
+        font-weight: 100;
+    }
     .filter {
+
         font-weight: 300;
         color: var(--gray02);
     }
 }
+
+.modal {
+    background: rgba(0,0,0, 0.4);
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    .modal-content{
+        background: white;
+        width: 300px;
+        height: 100px;
+        border-radius: 4px;
+        box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.30);
+        padding: 20px;
+    }
+}
+
 
 .display-none {display: none;}
 .fl-break {flex-basis: 100%;}
