@@ -28,12 +28,16 @@
                             <span>Drag here</span>
                         </div>
                     </td>
-                    <td>
-                        <button class="menu">
+                    <td class="actions">
+                        <button class="menu" onclick="toggleMenu()">
                             <svg class="icon accent">
                                 <use xlink:href="#menu"></use>
                             </svg>
                         </button>
+                        <div class="menu-body" style="display:none;">
+                            <span><button>Clear</button></span>
+                            <span><button>another</button></span>
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -670,7 +674,7 @@
         <div class="details">
             <div><span class="tagsinfo">tagname </span><span class="local-attribute"> - Attibute</span></div>
             <section class="filter">
-                <button class="link">filtered value</button>
+                <button class="link" onclick="showModal()">filtered value</button>
             </section>
         </div>
         

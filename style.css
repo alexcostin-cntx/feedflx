@@ -37,6 +37,9 @@ table tr th {
 table tr td {
   height: 45px;
 }
+table tr td.actions {
+  position: relative;
+}
 
 button:focus {
   outline: 0;
@@ -57,6 +60,15 @@ button.link {
   text-decoration: underline;
   color: var(--accent);
   outline: 0;
+}
+
+.menu-body {
+  background: white;
+  position: absolute;
+  right: 0;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.1);
 }
 
 .container {

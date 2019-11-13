@@ -1,3 +1,5 @@
+// sorry for the ugly code :D
+
 const attrButtons = document.getElementsByClassName('atributes');
 const modal = document.getElementById("modal-backdrop");
 const dragPill = document.querySelectorAll(".drag-pill.full");
@@ -6,6 +8,11 @@ const dragDestinations = document.querySelectorAll(".receive");
 const closeModal = () => {
     modal.setAttribute("style", "display:none")
 }
+
+const showModal = () => {
+    modal.setAttribute("style", " ")
+}
+
 
 // expand attibutes list
 for (let i = 0; i < attrButtons.length; i++) {
@@ -18,6 +25,7 @@ for (let i = 0; i < attrButtons.length; i++) {
 
         // check if clicked button is open or not
         if ( this.getAttribute("data-open")=="false") {
+            checkForOpenStuff();
             this.setAttribute("data-open", "true")
             section.setAttribute("style", "display:initial");
             parent.setAttribute("style", "z-index:4");
@@ -35,7 +43,25 @@ for (let i = 0; i < attrButtons.length; i++) {
     }
 }
 
+const checkForOpenStuff = () => {
+        //search for open buttons
+        let openBTN = document.querySelector("button[data-open='true']");
+        let openList  = document.querySelector(".attr-list.open");
+        let svg;
+        let parent;
+        let counter;
 
+        if (openBTN !== null) {
+            let svg = openBTN.getElementsByClassName("icon")[0];
+            let parent = openBTN.parentElement;
+            let counter = parent.previousElementSibling;
+            openBTN.setAttribute("data-open", "false");
+            parent.setAttribute("style", " ");
+            counter.setAttribute("style", " ");
+            svg.firstElementChild.setAttribute("xlink:href", "#caret");
+            openList.classList.remove("open");
+        } else {}
+}
 //-------------------------------------------------
 //-------------------Drag stuff--------------------
 
@@ -63,7 +89,6 @@ function dragStart(e) {
         ?
         true :
         false;
-    console.log(nested);
     getAttr = this.getElementsByTagName("span")[0].innerHTML;
 
 }
